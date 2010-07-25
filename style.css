@@ -98,6 +98,22 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     background-image: url(images/header-photos.jpg);
 }
 
+.section-peace-justice #header {
+    background-image: url(images/header-peace.jpg);
+}
+
+.section-congregational-life #header {
+    background-image: url(images/header-conglife.jpg);
+}
+
+.section-children-youth #header {
+    background-image: url(images/header-children.jpg);
+}
+
+.section-community-ministry #header {
+    background-image: url(images/header-community.jpg);
+}
+
 h1 a {
     display: block;
     height: 90px;
@@ -130,6 +146,12 @@ h1 a {
 
 .section-title a:hover {
     border-bottom: 8px dotted #cbc7c4;
+}
+
+.section-congregational-life .section-title a,
+.section-community-ministry .section-title a {
+    font-size: 5em;
+    margin-top: 50px;
 }
 
 #header-content {
@@ -217,6 +239,27 @@ h1 a {
 
 #sidebar .menu li li a {
     font-size: 0.9em;
+}
+
+#sidebar .menu .current-menu-item a {
+    color: black;
+    font-style: normal;
+    font-weight: bold;
+}
+
+#sidebar .menu .current-menu-item .sub-menu a {
+    color: #5E3A28;
+    font-style: italic;
+    font-weight: normal;
+}
+
+#sidebar .menu .sub-menu {
+    display: none;
+}
+
+#sidebar .menu .current-menu-item .sub-menu,
+#sidebar .menu .current-menu-ancestor .sub-menu {
+    display: block;
 }
 
 /* Content styles */
