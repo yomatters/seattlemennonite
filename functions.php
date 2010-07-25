@@ -72,6 +72,10 @@ function seattlemennonite_get_section($map, $child) {
 }
 
 function seattlemennonite_section() {
+    // Figure out what section (i.e. top level menu item) we are
+    // in. We do this by first looking for categories that match
+    // the top level menu items and then looking at the menu structure
+    // itself to figure out where we are.
 
     $locations = get_nav_menu_locations();
     if ( isset( $locations['primary'] ) ) {
@@ -94,11 +98,20 @@ function seattlemennonite_section() {
         foreach ( (array) $menu_items as $key => $menu_item ) {
             $map[$menu_item->db_id] = $menu_item;
         }
-        unset($menu_items);
+        unset($menu_items);        
         
-        // Loop through the menu items looking for the current one.
         foreach ( $map as $key => $menu_item ) {
-            if ( array_intersect($current_classes, $menu_item->classes) ) {
+            // If this is a category, we check to see if it matches the
+            // name of one of the top level menu items. If it is a post
+            // or page, we check to see if it is in such a category.
+            // Otherwise, we look at the classes of the the menu item
+            // to try to determine if it is the active one.
+            
+            $parent = $menu_item->menu_item_parent;
+            $title = $menu_item->title;
+            $classes = $menu_item->classes;
+            if ( ( $parent == 0 && ( is_category($title) || in_category($title) ) ) || 
+                ( array_intersect($current_classes, $classes) ) ) {
                 return seattlemennonite_get_section($map, $menu_item);
             }
         }        
@@ -107,7 +120,8 @@ function seattlemennonite_section() {
 
 add_filter('body_class','seattlemennonite_body_classes');
 function seattlemennonite_body_classes($classes) {
-    // Based on the menu section, assign the appropriate body class.
+    // Based on the current category or menu section, assign the 
+    // appropriate body class.
     $section = seattlemennonite_section();
     if ( $section ) {
         $classes[] = 'section-' . sanitize_title($section['title']);
