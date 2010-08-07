@@ -21,7 +21,7 @@ get_header(); ?>
     			<p class="post-postedin">
     			    <?php the_tags('Tags: ', ', ', '<br />'); ?>
     			    <?php if ( ! in_category('Uncategorized') ) : ?>
-    			        Posted in <?php the_category(', ') ?> |
+    			        Posted in <?php seattlemennonite_post_categories(10) ?> |
     			    <?php endif; ?>
     			    <?php edit_post_link('Edit', '', ' | '); ?> 
     			    <?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?>

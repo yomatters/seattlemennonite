@@ -131,4 +131,40 @@ function seattlemennonite_body_classes($classes) {
 	return $classes;
 }
 
+function seattlemennonite_post_categories($excl=''){
+    $categories = get_the_category($post->ID);
+    if(!empty($categories)){
+      	$exclude=$excl;
+      	$exclude = explode(",", $exclude);
+        $printCount = 0;
+      	foreach ($categories as $cat) {
+      		$html = '';
+      		if(!in_array($cat->cat_ID, $exclude)) {
+                if($printCount > 0){
+                    $html = ', ';
+                }
+                $html .= '<a href="' . get_category_link($cat->cat_ID) . '" ';
+                $html .= 'title="' . $cat->cat_name . '">' . $cat->cat_name . '</a>';
+                echo $html;
+                $printCount++;
+      		}
+	    }
+    }
+}
+
+# TRUE if:
+#   a custom excerpt exists which is shorter than the_content, or..
+#   the_content's length exceeds $threshold_length.
+# FALSE otherwise
+function seattlemennonite_should_use_the_excerpt($the_excerpt, $the_content, $threshold_length){
+    if(strlen($the_excerpt) > strlen($the_content)){
+        return false;
+    }else if(strlen($the_content) >= $threshold_length){
+        return true;
+    }else if(strcmp($the_excerpt, substr($the_content,0,strlen($the_excerpt))) == 0){
+        return false;
+    }
+    return true;
+}
+
 ?>
