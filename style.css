@@ -173,6 +173,10 @@ h1 a {
     display: none;
 }
 
+#header a {
+    color: white;
+}
+
 /* Sidebar styles */
 #sidebar h2, #sidebar h3, #sidebar h4, #sidebar h5, #sidebar h6 {
     text-transform: lowercase;
